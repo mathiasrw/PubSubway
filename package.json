@@ -1,0 +1,25 @@
+{
+  "name": "pubsubway",
+  "version": "0.19.0",
+  "description": "Plain pubsub module with a spice of logic to when subscribers get the message. Get out of the callback hell - take the subway in a trafic jam.",
+  "main": "pubsubway-min.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mathiasrw/PubSubway.git"
+  },
+  "keywords": [
+    "pubsub",
+    "callback",
+    "publish",
+    "subscribe"
+  ],
+  "author": "Mathias Rangel Wulff <mathias@rawu.dk> (http://rawu.dk/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mathiasrw/PubSubway/issues"
+  },
+  "homepage": "https://github.com/mathiasrw/PubSubway"
+}

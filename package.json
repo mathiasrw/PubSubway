@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/mathiasrw/PubSubway/issues"
   },
-  "homepage": "https://github.com/mathiasrw/PubSubway"
+  "homepage": "https://github.com/mathiasrw/PubSubway",
   "dependencies": {},
   "devDependencies": {
     "utest": "*",

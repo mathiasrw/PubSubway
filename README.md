@@ -1,4 +1,4 @@
-PubSubway
+PubSubway [![NPM version](https://badge.fury.io/js/pubsubway.svg)](http://badge.fury.io/js/pubsubway) [![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
 =========
 
 #### Plain pubsub module with a spice of logic to when subscribers get the message.

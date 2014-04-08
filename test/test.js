@@ -15,7 +15,7 @@ test('Just a stub - sorry...', {
   
   
   'TEST2': function () {
-	(5).should.be(5);
+	//(5).should.be(5);
   }
 
 });

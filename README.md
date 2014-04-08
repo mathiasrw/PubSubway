@@ -1,4 +1,3 @@
-
 PubSubway 
 =========
 
@@ -39,17 +38,24 @@ _PubSubway provides an underground system (of tunnels) helping you with real wor
 	
   	var db = require('mysql');
   	var go = require('pubsubway');
-	
-	var mysql = createConnection(db)
 
-  	go.subscibeAND(['/sql_a/done', '/sql_b/done'], function(){
-  		console.log('Both SQL a + b are done now - Hurray...');
+	
+	var mysql = createConnection(db);
+
+
+  	go.whenAND(['/sql_a/done', '/sql_b/done'], function(){
+  		console.log('Both SQL a and SQL b are done now');
   	});
 
-	mysql.query('UPDATE product SET stock = 7 WHERE id = 423', go.publishBack('/sql_a/done'))
-	
-	mysql.query('UPDATE product SET stock = 0 WHERE id = 151', go.publishBack('/sql_b/done'))
-	
+
+	mysql.query('UPDATE product SET stock = 7 WHERE id = 423', function(){
+		go.yell('/sql_a/done')
+	});
+
+
+	mysql.query('UPDATE product SET stock = 2 WHERE id = 332', function(){
+		go.yell('/sql_b/done')
+	});	
 
 ```
 

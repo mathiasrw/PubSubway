@@ -2,9 +2,12 @@
   "name": "pubsubway",
   "version": "0.19.0",
   "description": "Plain pubsub module with a spice of logic to when subscribers get the message. Get out of the callback hell - take the subway in a trafic jam.",
-  "main": "pubsubway-min.js",
+  "main": "pubsubway.js",
   "scripts": {
     "test": "node test/test.js"
+  },
+  "engines": {
+    "node": ">= 0.4"
   },
   "repository": {
     "type": "git",

@@ -27,8 +27,8 @@
   "homepage": "https://github.com/mathiasrw/PubSubway",
   "dependencies": {},
   "devDependencies": {
-    "utest": "*",
-    "assert": "*",
-    "should": "*"
+    "utest": "",
+    "assert": "",
+    "should": ""
   }
 }

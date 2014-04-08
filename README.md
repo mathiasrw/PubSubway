@@ -271,8 +271,9 @@ _The big handbrake_
 ```
 
 
+# Wrap topics
 
-# Wrab topics to act like traditional callback function to handle strings as callbacks
+Wrab topics to act like traditional callback function to handle strings as callbacks
 
 ```javascript
 	// Make it convinient to publish string instead of sending function as callback 
@@ -289,3 +290,5 @@ _The big handbrake_
 Loosely based on jQuery pub/sub plugin by Peter Higgins, expanded in scope. Rewritten blindly. 
   	
 License: MIT
+
+Pattern: Observer 

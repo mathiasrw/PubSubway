@@ -13,10 +13,7 @@ test('Just a stub - sorry...', {
 	is.strictEqual(1, 1);
   },
   
-  
-  'TEST2': function () {
-	//(5).should.be(5);
-  }
+
 
 });
 

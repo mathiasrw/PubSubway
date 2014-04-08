@@ -1,20 +1,24 @@
-PubSubway [![NPM version](https://badge.fury.io/js/pubsubway.svg)](http://badge.fury.io/js/pubsubway) [![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
+
+PubSubway 
 =========
 
 #### Plain pubsub module with a spice of logic to when subscribers get the message.
 
+[![NPM version](https://badge.fury.io/js/pubsubway.svg)](http://badge.fury.io/js/pubsubway) 
+[![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
+
 
 Have you ever had 
 
-1. Code you wanted to only invoke once - but with a message that repeats?
-2. Code you wanted to  only invoke when a range of messages have all been published (in random order)?
-3. Code you wanted to pause invoking at speciffic conditions?
+1. Code you wanted to only **invoke once** - but with a message that repeats?
+2. Code you wanted to  only **invoke when a range of messages have all been published** (in random order)?
+3. Code you wanted to **pause invoking** at speciffic conditions?
 
 Of cause you have... cause thats what real world code needs. 
 
 And everytime you have dealt with it by making some good counters around your pubsub structure and build nicely structured features to take care of when to invoke and when not to. 
 
-PubSubway take all the counters and the logic out of your code and leave easy to read chuncks of code with a light footprint.
+**PubSubway replaces the counters and the logic around your observer pattern with easy to read chuncks of code with a light footprint.**
 
     
 Just take the subway instead of sitting in the trafic jam...
@@ -25,29 +29,13 @@ Just take the subway instead of sitting in the trafic jam...
 _PubSubway provides an underground system (of tunnels) helping you with real world callback hell. Think subway in a trafic jam._
 
 ----
-  
-```javascript
-/*
-  	
-  	* Trivial example * 
-	******************/
-	
-  	var go = require('pubsubway');
-
-  	go.subscribe('foo', function(){
-  		console.log('bar')
-  	});
-
-  	go.publish('foo')
-
-```
 
 
 ```javascript
 /*
   	
-  	* More Usefull examle * 
-	***********************/
+  	* Example * 
+	***********/
 	
   	var db = require('mysql');
   	var go = require('pubsubway');

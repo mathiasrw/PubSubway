@@ -7,7 +7,7 @@
 var a = 0;
 
 
-go.when('/a/ready', functino(){
+go.when('/a/ready', function(){
         a++;
 })
 

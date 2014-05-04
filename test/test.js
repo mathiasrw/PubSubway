@@ -4,14 +4,22 @@
 	var should = require('should');
 
 
+var a = 0;
 
+
+go.when('/a/ready', functino(){
+        a++;
+})
 
 
 test('Just a stub - sorry...', {
 
   'TEST': function () {
-	is.strictEqual(1, 1);
+    a = 1;
+    go.yell('/a/ready');
+	is.strictEqual(2, a);
   },
+
   
 
 

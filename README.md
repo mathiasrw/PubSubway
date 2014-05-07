@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/pubsubway.png)](https://nodei.co/npm/pubsubway/)
+[![npm install pubsubway](https://nodei.co/npm/pubsubway.png)](https://www.npmjs.org/package/pubsubway)
 
 [![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
 

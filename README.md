@@ -82,7 +82,23 @@ Dont fall into the pifall of using it as regular functions. A good idea is to la
 
 
 
-ToDo: Tests, documentation and better introduction
+# ToDo 
+
+- **Tests**: 
+The module is used and enchanged in production - so it works, but better get those formal tests up and running) 
+
+- **Documentation**:
+Lets get that documentation up and running
+
+- **Better introduction**:
+Well - just do it
+
+- **pubAlert**:
+optional Log warning when something is published that nothing is subscribed to. Good fro development. 
+
+- **pubBuffer**:
+Setting to buffer all publications untill released. Good for when you publish things in your sync flow, but want to message something that will be observing a little later caused by async waiting. Is it bad structure of the code? well, if it is used in the main flow it is, but during the initial load of code it is not. 
+
 
 
 # Documentation
@@ -284,8 +300,13 @@ Wrab topics to act like traditional callback function to handle strings as callb
 
 ----
 
+
 Loosely based on jQuery pub/sub plugin by Peter Higgins, expanded in scope. Rewritten blindly. 
   	
 License: MIT
 
 Pattern: Observer 
+
+----
+___Any involvement in the project is always welcome, and encouraged.___
+----

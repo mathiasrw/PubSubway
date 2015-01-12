@@ -1,7 +1,7 @@
 {
   "name": "pubsubway",
-  "version": "0.19.4",
-  "description": "Plain pubsub module with a spice of logic to when subscribers get the message using easy-to-read chunks of code with a light footprint. Pubsub for modern JS apps is to get out of callback hell - take the subway in a traffic jam.",
+  "version": "0.19.5",
+  "description": "PubSub extended with logic keeping a light footprint. Pubsub for modern JS apps is to get out of callback hell - take the subway in a traffic jam.",
   "main": "js/pubsubway.min.js",
   "scripts": {
     "test": "node test/test.js"

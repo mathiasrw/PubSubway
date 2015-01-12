@@ -8,27 +8,20 @@ PubSubway
 
 #### Plain pubsub module with a spice of logic to when subscribers get the message.
 
-
-
 Have you ever had 
 
-1. Code you wanted to only **invoke once** - but with a message that repeats?
-2. Code you wanted to  only **invoke when a range of messages have all been published** (in random order)?
-3. Code you wanted to **pause invoking** at speciffic conditions?
+- Code you wanted to only **invoke once** - but with a message that repeats?
+- Code you wanted to  only **invoke when a range of messages have all been published** (in random order)?
+- Code you wanted to **pause invoking** at speciffic conditions?
 
 Of cause you have... cause thats what real world code needs. 
 
 And everytime you have dealt with it by making some good counters around your pubsub structure and build nicely structured features to take care of when to invoke and when not to. 
 
 **PubSubway replaces the counters and the logic around your observer pattern with easy to read chuncks of code with a light footprint.**
-
     
 Just take the subway instead of sitting in the trafic jam...
 
-
----- 
-
-_PubSubway provides an underground system (of tunnels) helping you with real world callback hell. Think subway in a trafic jam._
 
 ----
 
@@ -66,38 +59,22 @@ _PubSubway provides an underground system (of tunnels) helping you with real wor
 To use in regular browser just include file as normal (Yay!) 
 
 ```HTML
-    <script src="pubsubway.js" type="text/javascript"></script>
+    <script src="pubsubway.min.js" type="text/javascript"></script>
 ```
 
 In the browser you use the examples with `pubsubway.*` instead of the `go.*` - and ignore the 'require' line.
 
 
-    
+# Involvement
+
+_**Any involvement in the project is very welcome, and encouraged.**_    
 
 
 # The pubsub pattern
 
-Please remember that the pubsub pattern is best suited to publish messages about what **has happened**.
+Please remember that the pubsub style of programing (observer pattern) is best suited to publish messages about what **has happened**.
 Dont fall into the pifall of using it as regular functions. A good idea is to label your topics in past sense.
 
-
-
-# ToDo 
-
-- **Tests**: 
-The module is used and enchanged in production - so it works, but better get those formal tests up and running) 
-
-- **Documentation**:
-Lets get that documentation up and running
-
-- **Better introduction**:
-Well - just do it
-
-- **pubAlert**:
-optional Log warning when something is published that nothing is subscribed to. Good fro development. 
-
-- **pubBuffer**:
-Setting to buffer all publications untill released. Good for when you publish things in your sync flow, but want to message something that will be observing a little later caused by async waiting. Is it bad structure of the code? well, if it is used in the main flow it is, but during the initial load of code it is not. 
 
 
 
@@ -298,15 +275,34 @@ Wrab topics to act like traditional callback function to handle strings as callb
 
 ```
 
+
 ----
 
+# ToDo 
 
-Loosely based on jQuery pub/sub plugin by Peter Higgins, expanded in scope. Rewritten blindly. 
+- **Tests**: 
+The module is used and enchanged in production - so it works, but better get those tests up and running...
+
+- **pubAlert**:
+optional Log warning when something is published that nothing is subscribed to. Good fro development. 
+
+- **pubBuffer**:
+Setting to buffer all publications untill released. Good for when you publish things in your sync flow, but want to message something that will be observing a little later caused by async waiting. Is it bad structure of the code? well, if it is used in the main flow it is, but during the initial load of code it is not. 
+
+- **Mode strings to mode vars**
+To make the minifyed version smaller all the hardcoded strings for mode should be a variable returned by a function. 
+
+
+--------------------------------------------
+
+
+# tl;dr
   	
 License: MIT
 
 Pattern: Observer 
 
-----
-___Any involvement in the project is always welcome, and encouraged.___
-----
+Inspiration: Loosely based on jQuery pub/sub plugin by Peter Higgins, expanded in scope. Rewritten blindly. 
+
+
+--------------------------------------------

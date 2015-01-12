@@ -1,0 +1,8 @@
+#########
+# Ignnoring node modules - so please run 
+# npm install
+# when starting to develop on a new enviroment
+########
+
+node_modules/
+.log

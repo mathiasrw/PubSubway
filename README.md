@@ -1,5 +1,8 @@
-[![npm install pubsubway](https://nodei.co/npm/pubsubway.png)](https://www.npmjs.org/package/pubsubway)
+[![npm install pubsubway](https://nodei.co/npm/pubsubway.png?compact=true)](http://browsenpm.org/package/pubsubway)
 
+
+[![npm install pubsubway](https://img.shields.io/npm/dm/pubsubway.svg?style=flat)](http://browsenpm.org/package/pubsubway)
+[![MIT](https://img.shields.io/npm/l/pubsubway.svg?style=flat)](http://browsenpm.org/package/pubsubway)
 [![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
 
 

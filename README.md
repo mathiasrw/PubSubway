@@ -1,6 +1,3 @@
-[![npm install pubsubway](https://nodei.co/npm/pubsubway.png?compact=true)](http://browsenpm.org/package/pubsubway)
-
-
 [![npm install pubsubway](https://img.shields.io/npm/dm/pubsubway.svg?style=flat)](http://browsenpm.org/package/pubsubway)
 [![MIT](https://img.shields.io/npm/l/pubsubway.svg?style=flat)](http://browsenpm.org/package/pubsubway)
 [![Build Status](https://travis-ci.org/mathiasrw/PubSubway.svg?branch=master)](https://travis-ci.org/mathiasrw/PubSubway) 
@@ -27,45 +24,36 @@ Just take the subway instead of sitting in the trafic jam...
 
 
 ----
+Example:
 
+```js
+var db = require('mysql');
 
-```javascript
-/*
-  	
-  	* Example * 
-	***********/
-	
-  	var db = require('mysql');
-  	var go = require('pubsubway');
+var go = require('pubsubway');
 
-	
-	var mysql = createConnection(db);
+var mysql = createConnection(db);
 
+mysql.query('UPDATE product SET stock = 7 WHERE id = 423', function() {
+	go.yell('/sql_a/done')
+});
 
-  	go.whenAND(['/sql_a/done', '/sql_b/done'], function(){
-  		console.log('Both SQL a and SQL b are done now');
-  	});
+mysql.query('UPDATE product SET stock = 2 WHERE id = 332', function() {
+	go.yell('/sql_b/done')
+});
 
-
-	mysql.query('UPDATE product SET stock = 7 WHERE id = 423', function(){
-		go.yell('/sql_a/done')
-	});
-
-
-	mysql.query('UPDATE product SET stock = 2 WHERE id = 332', function(){
-		go.yell('/sql_b/done')
-	});	
-
+go.whenAND(['/sql_a/done', '/sql_b/done'], function() {
+	console.log('Both SQL a and SQL b are done now');
+});
 ```
 
 
-To use in regular browser just include file as normal (Yay!) 
+To use in regular browser instead of Node please include via unpkg 
 
 ```HTML
-    <script src="pubsubway.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/pubsubway"></script>
 ```
 
-In the browser you use the examples with `pubsubway.*` instead of the `go.*` - and ignore the 'require' line.
+The global scope will be ~poluted~ populated with the object `pubsubway` - please note that all examples on this site uses `go` to illustrate the PubSubWay object.
 
 
 # Involvement
@@ -79,27 +67,20 @@ Please remember that the pubsub style of programing (observer pattern) is best s
 Dont fall into the pifall of using it as regular functions. A good idea is to label your topics in past sense.
 
 
-
-
 # Documentation
 
-You include the module with a traditional `var go = require('pubsubway');` or any name you find suitable. In the documentation I chose `go` cause it short and sounds nice. 
-
-Depending on the style of program you are developing I personally prefer either long and javaish style method names or short names that fit into the rest of the code more seamless. Thats why the API comes with a bunch of aliases  
-
-
+You include the module with a traditional `var go = require('pubsubway');` (or any name you find suitable). In the documentation I chose `go` cause it short and sounds nice. 
 
 
 ## Publish a message
 
 ```javascript
-    go.pub =
-    go.yell =  
-    go.publish = function(
-                            topic /* string */ 
-                            ,  
-                            args /* array */
-                            )
+go.pub = 
+go.yell = 
+go.publish = function(
+						topic, 	/* string */ 
+						args 	/* array */ 
+					)
 ```
 
 

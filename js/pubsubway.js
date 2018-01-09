@@ -6,8 +6,6 @@
     
     License: MIT
 
-    Version: 0.19.5
-
     
     * Simple example * 
     ******************
@@ -36,18 +34,18 @@ var pubsubway = function() {
     var voidAction = false;
     me.subways = []
 
-	me.resetAll = function(){
-	    proxy = {};
-	    doLog = false;
-	    voidAction = false;
-	    me.subways = [];
-	    return me;
+    me.resetAll = function(){
+        proxy = {};
+        doLog = false;
+        voidAction = false;
+        me.subways = [];
+        return me;
     }
 
 
     me.log = function(
-        				msg 	/* string */ ,
-        				level	/* integer */
+                        msg     /* string */ ,
+                        level   /* integer */
     ) {
         //  log events -  
         //  Please overwrite behavior with something clever or useful other than
@@ -74,7 +72,7 @@ var pubsubway = function() {
             topic /* string */ ,
             args /* mix */
     ) {
-			
+            
         //      pubsubway.publish("/some/topic", ["a","b","c"]); 
 
         //      todo: ? let args be any amount of parameter and not array...
@@ -102,8 +100,8 @@ var pubsubway = function() {
     };
 
 
-	me.subREWIND =
-	me.whenREWIND =
+    me.subREWIND =
+    me.whenREWIND =
     me.subscribeANDmodeRewind =
         function(
             topic /* string || array */ ,
@@ -319,7 +317,7 @@ var pubsubway = function() {
                     (2 in topic) && (topic[2] instanceof Array)
                 )) {
                     var msg = 'Wrong pubsub formatting of ORmodeButNotIfButResetWith';
-                	me.log(msg, 1)
+                    me.log(msg, 1)
                     return false;
                 }
 
@@ -406,24 +404,31 @@ var pubsubway = function() {
 
     // Make it convinient to publish string instead of sending function as callback 
     // Use like:       
-    // callback = pubsubway.pubsubBack(callbacktopic)
+    // callback = pubsubway.pubsubBack(callbacktopicString)
     // in our own function to be able to put a function to tall OR a string to publish as your own callback 
-    me.pubsubBack = function(callback) {
-        callback = callback || function() {};
+    me.pubsubBack = function(callbacktopic) {
+        callbacktopic = callbacktopic || function() {};
 
-        if (!(callback instanceof Function)) {
-            var topic = callback // ToDo: make sure its not an object that only asign a ref
-            callback = function() {
-                me.publish(topic, arguments)
+        if (!(callbacktopic instanceof Function)) {
+            var topic = callbacktopic 
+            var args = [];
+            if(1<arguments.length){
+                for (var i = 1; i < arguments.length; i++) {
+                    args.push(arguments[i])
+                };    
+            }
+            callbacktopic = function() {
+                me.publish(topic, args)
             }
         }
-        return callback;
+        return callbacktopic;
     }
 
     return me;
 }()
 
-if (typeof module !== 'undefined' && typeof module === 'object' && typeof(module.exports) !== 'undefined') {	
-	module.exports = pubsubway;
+if (typeof module !== 'undefined' && typeof module === 'object' && typeof(module.exports) !== 'undefined') {    
+    module.exports = pubsubway;
 }
 
+    

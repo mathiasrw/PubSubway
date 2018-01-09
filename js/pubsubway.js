@@ -1,8 +1,8 @@
 /*  
   
-    NodeJS pub/sub module by Mathias Rangel Wulff (github: mathiasrw)
+    pub/sub module Mathias Rangel Wulff (github: mathiasrw)
 
-    Loosely based on jQuery pub/sub plugin by Peter Higgins, expanded in scope. Rewritten blindly. 
+    Bloomed from jQuery pub/sub plugin by Peter Higgins.
     
     License: MIT
 
@@ -20,19 +20,33 @@
 
     ******************
 
-    To use in regular browser just include file as normal - Yay...
-    (just avoid the 'require' line and use pubsubway.* instead of the go.* in the example)
 
 
     
 */
 
-var pubsubway = function() {
+
+
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.pubsubway = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function () {
+
     var me = this;
     var proxy = {};
     var doLog = false;
     var voidAction = false;
-    me.subways = []
+    me.subways = [];
 
     me.resetAll = function(){
         proxy = {};
@@ -40,8 +54,7 @@ var pubsubway = function() {
         voidAction = false;
         me.subways = [];
         return me;
-    }
-
+    };
 
     me.log = function(
                         msg     /* string */ ,
@@ -79,20 +92,19 @@ var pubsubway = function() {
 
         if ((topic instanceof Array)) {
             for (var i = 0; i < topic.length; i++) {
-                me.publish(topic[i], args)
-            };
+                me.publish(topic[i], args);
+            }
         }
 
         if (voidAction) {
-            return me.log('void: ' + topic, 99)
+            return me.log('void: ' + topic, 99);
         }
 
-        me.log(topic, 100)
+        me.log(topic, 100);
 
         args = args || [];
 
         args = arrayWrap(args);
-
 
         return proxy[topic] && (this.each(proxy[topic], function() {
             this.apply(me, args);
@@ -108,7 +120,7 @@ var pubsubway = function() {
             callback /* Function */ ,
             subscribeFirst /* [bool] */
     ) {
-        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeRewind')
+        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeRewind');
     };
 
 
@@ -119,7 +131,7 @@ var pubsubway = function() {
             callback /* Function */ ,
             subscribeFirst /* [bool] */
     ) {
-        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeContinues')
+        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeContinues');
     };
 
     //tpdp: implement subscribeOnce (OR mode)  
@@ -136,7 +148,7 @@ var pubsubway = function() {
             subscribeFirst /* [bool] */
     ) {
         //ToDo:implement reset
-        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeOnce')
+        me.subscribe(topic, callback, subscribeFirst, 'ANDmodeOnce');
     };
 
     me.subORBUT =
@@ -156,12 +168,12 @@ var pubsubway = function() {
 
         resetWith = arrayWrap(resetWith);
 
-        var settings = []
-        settings[0] = topic
-        settings[1] = butNotIf
-        settings[2] = resetWith
+        var settings = [];
+        settings[0] = topic;
+        settings[1] = butNotIf;
+        settings[2] = resetWith;
 
-        me.subscribe(settings, callback, subscribeFirst, 'ORmodeButNotIfButResetWith')
+        me.subscribe(settings, callback, subscribeFirst, 'ORmodeButNotIfButResetWith');
     };
 
 
@@ -183,13 +195,13 @@ var pubsubway = function() {
         // 
         // ToDo: make parameters like object notation args
 
-        subscribeFirst = subscribeFirst || false
+        subscribeFirst = subscribeFirst || false;
 
-        mode = mode || null
+        mode = mode || null;
 
         /* if mode is set topic must be array */
-        if (null != mode && !(topic instanceof Array)) {
-            topic = [topic]
+        if (null !== mode && !(topic instanceof Array)) {
+            topic = [topic];
         }
 
 
@@ -208,7 +220,7 @@ var pubsubway = function() {
         }
 
         /* IF just normal OR  */
-        if (null == mode) {
+        if (null === mode) {
             me.each(topic, function() {
                 me.subscribe(this, callback, mode, subscribeFirst);
             });
@@ -218,23 +230,23 @@ var pubsubway = function() {
 
 
         // Init data for the subways 
-        var uid = topic.join('#') + '#' + Math.random()
-        me.subways[uid] = {}
-        me.subways[uid].mux = []
+        var uid = topic.join('#') + '#' + Math.random();
+        me.subways[uid] = {};
+        me.subways[uid].mux = [];
         me.subways[uid].dontRun = false;
-        me.subways[uid].handlers = []
-        me.subways[uid].handlers.push(me.subscribe(uid, callback))
+        me.subways[uid].handlers = [];
+        me.subways[uid].handlers.push(me.subscribe(uid, callback));
 
 
         for (var i in topic) {
-            me.subways[uid].mux[topic[i]] = 1
+            me.subways[uid].mux[topic[i]] = 1;
         }
 
         switch (mode) {
             case 'ANDmodeRewind':
                 me.each(topic, function(theme) {
-                    var theme = this
-                    var thisUid = uid
+                    var theme = this;				
+                    var thisUid = uid;
                     var handler = me.subscribe(theme, function() {
                         me.subways[thisUid].mux[theme] = 0;
 
@@ -243,22 +255,22 @@ var pubsubway = function() {
                             total += me.subways[thisUid].mux[topic[ii]];
                         }
 
-                        if (0 == total) {
+                        if (0 === total) {
                             me.publish(thisUid);
                             for (var ii in topic) {
                                 me.subways[thisUid].mux[topic[ii]] = 1;
                             }
                         }
                     });
-                    me.subways[thisUid].handlers.push(handler)
+                    me.subways[thisUid].handlers.push(handler);
                 });
                 break;
 
 
             case 'ANDmodeContinues':
                 me.each(topic, function(theme) {
-                    var theme = this
-                    var thisUid = uid
+                    var theme = this;
+                    var thisUid = uid;
                     var handler = me.subscribe(theme, function() {
                         me.subways[thisUid].mux[theme] = 0;
 
@@ -267,24 +279,24 @@ var pubsubway = function() {
                             total += me.subways[thisUid].mux[topic[ii]];
                         }
 
-                        if (0 == total) {
+                        if (0 === total) {
                             me.publish(thisUid);
 
                         }
                     });
-                    me.subways[thisUid].handlers.push(handler)
+                    me.subways[thisUid].handlers.push(handler);
                 });
                 break;
 
 
             case 'ANDmodeOnce':
                 me.each(topic, function(theme) {
-                    var theme = this
-                    var thisUid = uid
+                    var theme = this;
+                    var thisUid = uid;
                     var handler = me.subscribe(theme, function() {
 
                         if (me.subways[thisUid].dontRun) {
-                            return
+                            return;
                         }
 
                         me.subways[thisUid].mux[theme] = 0;
@@ -294,9 +306,9 @@ var pubsubway = function() {
                             total += me.subways[thisUid].mux[topic[ii]];
                         }
 
-                        if (0 == total) {
+                        if (0 === total) {
                             me.publish(thisUid);
-                            me.subways[thisUid].dontRun = true
+                            me.subways[thisUid].dontRun = true;
                         }
 
                         // ToDo ? 
@@ -305,7 +317,7 @@ var pubsubway = function() {
                         }*/
 
                     });
-                    me.subways[thisUid].handlers.push(handler)
+                    me.subways[thisUid].handlers.push(handler);
                 });
                 break;
 
@@ -317,20 +329,20 @@ var pubsubway = function() {
                     (2 in topic) && (topic[2] instanceof Array)
                 )) {
                     var msg = 'Wrong pubsub formatting of ORmodeButNotIfButResetWith';
-                    me.log(msg, 1)
+                    me.log(msg, 1);
                     return false;
                 }
 
-                var publish = topic[0]
-                var butNotIf = topic[1]
-                var resetWith = topic[2]
+                var publish = topic[0];
+                var butNotIf = topic[1];
+                var resetWith = topic[2];
 
                 me.each(resetWith, function(theme) {
-                    var theme = this
+                    var theme = this;
                     var handler = me.subscribe(theme, function() {
                         me.subways[uid].dontRun = false;
                     });
-                    me.subways[uid].handlers.push(handler)
+                    me.subways[uid].handlers.push(handler);
                 });
 
                 me.each(butNotIf, function(theme) {
@@ -338,25 +350,25 @@ var pubsubway = function() {
                     var handler = me.subscribe(theme, function() {
                         me.subways[uid].dontRun = true;
                     });
-                    me.subways[uid].handlers.push(handler)
+                    me.subways[uid].handlers.push(handler);
                 });
 
 
                 me.each(publish, function(theme) {
-                    var theme = this
+                    var theme = this;
                     var handler = me.subscribe(theme, function() {
                         if (me.subways[uid].dontRun) {
                             return;
                         }
                         me.publish(uid);
                     });
-                    me.subways[uid].handlers.push(handler)
+                    me.subways[uid].handlers.push(handler);
                 });
 
                 break;
 
             default:
-                me.log('Wrong mode setting in pubsubway: ' + mode, 1)
+                me.log('Wrong mode setting in pubsubway: ' + mode, 1);
                 return false;
         }
 
@@ -389,17 +401,17 @@ var pubsubway = function() {
         topics /* array */ ,
         callback /* function */
     ) {
-        var i = -1
-        var length = topics.length
+        var i = -1;
+        var length = topics.length;
         while (++i < length && callback.call(el = topics[i], i, el) !== false);
-    }
+    };
 
     var arrayWrap = function(data) {
         if (!(data instanceof Array)) {
-            return [data]
+            return [data];
         }
         return data;
-    }
+    };
 
 
     // Make it convinient to publish string instead of sending function as callback 
@@ -410,25 +422,30 @@ var pubsubway = function() {
         callbacktopic = callbacktopic || function() {};
 
         if (!(callbacktopic instanceof Function)) {
-            var topic = callbacktopic 
+            var topic = callbacktopic; 
             var args = [];
             if(1<arguments.length){
                 for (var i = 1; i < arguments.length; i++) {
-                    args.push(arguments[i])
-                };    
+                    args.push(arguments[i]);
+                }
             }
             callbacktopic = function() {
-                me.publish(topic, args)
-            }
+                me.publish(topic, args);
+            };
         }
         return callbacktopic;
-    }
+    };
 
     return me;
-}()
 
-if (typeof module !== 'undefined' && typeof module === 'object' && typeof(module.exports) !== 'undefined') {    
-    module.exports = pubsubway;
-}
+}));
+
+
+
+
+
+
+
+
 
     
